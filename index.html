@@ -3,16 +3,16 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>RecoupIQ ByteSDK: Pre-Compiled C99 Embedded Libraries, BVLOS Link &amp; DORA RT.02 CLI</title>
+<title>RecoupIQ ByteSDK: Ready-to-Run Software Libraries and Offline Tools</title>
 <link rel="icon" type="image/png" href="assets/RecoupIQ_Org_Logo_512x512.png">
-<meta name="description" content="Zero-heap pre-compiled C99 binary libraries for SeaTrac 32-byte acoustic links, Iridium/Skylo telemetry, FuelEU Maritime logs, BVLOS MAVLink bridges, Edge GDPR redaction, and offline DORA RT.02 LEI checks.">
+<meta name="description" content="Ready-to-run software tools that shrink satellite text messages, check ship fuel meters, blur faces on camera frames, and check supplier IDs offline.">
 <style>
 :root { --bg: #ffffff; --fg: #17202a; --muted: #5d6d7e; --line: #d5dbe1; --accent: #0b5cad; --card: #f5f7f9; }
 @media (prefers-color-scheme: dark) { :root { --bg: #11161c; --fg: #e8edf2; --muted: #9aa8b6; --line: #2b3640; --accent: #5aa9ff; --card: #182029; } }
 * { box-sizing: border-box; }
 body { margin: 0; background: var(--bg); color: var(--fg); font: 17px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
 main { max-width: 920px; margin: 0 auto; padding: 0 16px 64px; }
-nav { padding: 18px 0; border-bottom: 1px solid var(--line); font-size: 0.95rem; display: flex; gap: 20px; flex-wrap: wrap; }
+nav { padding: 18px 0; border-bottom: 1px solid var(--line); font-size: 0.95rem; display: flex; gap: 20px; flex-wrap: wrap; align-items: center; }
 header { padding: 40px 0 24px; border-bottom: 1px solid var(--line); }
 h1 { font-size: 2.1rem; line-height: 1.2; margin: 0 0 12px; }
 h2 { font-size: 1.35rem; margin: 40px 0 12px; }
@@ -25,7 +25,8 @@ table { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 0.9
 th, td { text-align: left; padding: 10px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
 td.n, th.n { text-align: right; white-space: nowrap; font-weight: 600; }
 .table-wrap { overflow-x: auto; }
-ul { padding-left: 20px; }
+ul, ol { padding-left: 20px; }
+li { margin-bottom: 6px; }
 a { color: var(--accent); }
 .cta { display: inline-block; margin-top: 12px; margin-right: 10px; padding: 10px 18px; border-radius: 6px; background: var(--accent); color: #fff; text-decoration: none; font-weight: 600; }
 .cta-sec { display: inline-block; margin-top: 12px; padding: 10px 18px; border-radius: 6px; border: 1px solid var(--accent); color: var(--accent); text-decoration: none; font-weight: 600; }
@@ -35,115 +36,121 @@ footer { margin-top: 48px; padding-top: 16px; border-top: 1px solid var(--line);
 </head>
 <body>
 <main>
-<nav style="align-items:center">
+<nav>
   <img src="assets/RecoupIQ_Org_Logo_512x512.png" alt="RecoupIQ Logo" width="32" height="32" style="border-radius:6px;display:block">
-  <a href="satlink.html">NeuroPulse SatLink</a>
-  <strong>RecoupIQ ByteSDK &amp; Offline Compliance Binaries</strong>
+  <strong>RecoupIQ ByteSDK and Offline Tools</strong>
+  <a href="satlink.html">Drone and Buoy Benchmarks</a>
 </nav>
 
 <header>
-  <h1>Pre-compiled C99 byte-boundary binaries &amp; air-gapped compliance tools</h1>
-  <p class="lead">Test on your own telemetry or registers in 30 seconds, then unlock production binaries offline with an Ed25519 licence token. Zero sales calls, zero cloud egress, and zero hardware modifications.</p>
-  <a class="cta" href="downloads/RecoupIQ_ByteSDK_Eval_2027-02-28.zip">Download Free 30-Second Eval (.zip)</a>
-  <a class="cta-sec" href="mailto:alex.v@recoup-iq.tech?subject=RecoupIQ%20Commercial%20Binary%20Licence%20Order">Order Offline Ed25519 Licence Key</a>
+  <h1>Cut satellite data bills and check sensor logs offline</h1>
+  <p class="lead">RecoupIQ ByteSDK is a small ready-to-run software pack for boats, drones, cameras, and office teams. Test it on your own files in 30 seconds. Unlock full use offline with a text key, with zero sales calls and zero hardware changes.</p>
+  <a class="cta" href="downloads/RecoupIQ_ByteSDK_Eval_2027-02-28.zip">Download Free 30-Second Test (.zip)</a>
+  <a class="cta-sec" href="mailto:contact@recoup-iq.tech?subject=RecoupIQ%20ByteSDK%20Licence%20Order">Order Offline Licence Key</a>
 </header>
 
-<h2>Six verified modules shipped as compiled binaries</h2>
-<p>Every module links cleanly via a single C header (<code>recoupiq_bytesdk.h</code>) against symbol-stripped static or shared archives on <code>windows-x64</code>, <code>linux-x86_64</code>, <code>linux-arm64</code>, and Arm <code>Cortex-M0+/M4/M33</code>.</p>
+<h2>Six ready-to-run tools in one small download</h2>
+<p>Each tool comes ready to run on Windows PCs, Linux PCs, Raspberry Pi 4 boards, and small Arm chips. Your software calls one plain C header file (<code>recoupiq_bytesdk.h</code>), and your own code stays private.</p>
 
 <div class="grid">
   <div class="card">
-    <h3>1. DORA RT.02 LEI Gate</h3>
-    <div class="big">3.19M / s</div>
-    Checks 20-char ISO 17442 LEIs (MOD 97-10) and routes Regulation (EU) 2024/2956 vendor registers to APPROVE, DENY, or ABSTAIN offline.
+    <h3>1. Supplier ID Checker (DORA)</h3>
+    <div class="big">3.19M per sec</div>
+    Checks 20-letter company IDs offline on a Raspberry Pi 4. Flags expired or wrong IDs before you file EU 2024-2956 reports.
   </div>
   <div class="card">
-    <h3>2. Subsea &amp; Satellite 8K SDK</h3>
-    <div class="big">6.67x</div>
-    Compresses UK Met Office marine casts in 7.5 KB SRAM into &le;32-byte SipHash-2-4 Reed-Solomon acoustic or Iridium SBD frames.
+    <h3>2. Subsea and Boat Data Saver</h3>
+    <div class="big">8.55x smaller</div>
+    Shrinks UK Met Office lightship weather text from 564 bytes to 66 bytes in 7.5 KB of memory. Splits data into 32-byte tagged pieces.
   </div>
   <div class="card">
-    <h3>3. FuelEU Maritime Guard</h3>
-    <div class="big">0 false</div>
-    Compresses NMEA and Coriolis flow logs, flags 18% meter bypass against shaft SFOC, and chains Regulation (EU) 2023/1805 gap records with BLAKE2b.
+    <h3>3. Ship Fuel Meter Check</h3>
+    <div class="big">0 false alarms</div>
+    Shrinks ship GPS and fuel text logs. Spots an 18% fuel pipe bypass against engine load, and locks gap notes against edits.
   </div>
   <div class="card">
-    <h3>4. Edge GDPR Evidence Vault</h3>
+    <h3>4. Camera Privacy Blur Box</h3>
     <div class="big">7.37 ms</div>
-    Scrubs PII boxes on 768&times;512 camera frames on Raspberry Pi 4 ARM64, wipes raw RAM (<code>crypto_wipe</code>), and seals a keyed BLAKE2b scene receipt.
+    Blurs face and plate boxes on a 768 by 512 photo on a Raspberry Pi 4. Wipes raw memory and seals the rest of the photo.
   </div>
   <div class="card">
-    <h3>5. MAVLink Quiet-Link Bridge</h3>
-    <div class="big">191.5 KB/h</div>
-    Authenticated BVLOS drone &amp; USV command link cutting standard MAVLink satellite IP traffic by ~80x while preserving autopilot RTL failsafes.
+    <h3>5. Quiet Drone and Boat Link</h3>
+    <div class="big">191.5 KB per hr</div>
+    Sends signed drone and boat commands over satellite IP links. Uses about 80 times less data than normal ground-station rates in lab runs.
   </div>
   <div class="card">
-    <h3>6. Serial Guard 9,600-Baud</h3>
+    <h3>6. Old Serial Radio Lock</h3>
     <div class="big">10.2 ms</div>
-    Bump-in-the-wire XChaCha20-Poly1305 encryption, replay lock, and Reed-Solomon FEC for legacy Modbus RTU and DNP3 utility radio links.
+    Protects 9,600-baud serial radio links with encryption and anti-replay tags. Passed 300 out of 300 Modbus checks on a Raspberry Pi 4.
   </div>
 </div>
 
-<h2>Published commercial pricing (compiled binary delivery, zero meetings)</h2>
-<p>All commercial tiers deliver pre-compiled binary libraries or standalone executables unlocked by an offline <code>Ed25519</code> licence key. Source code remains proprietary to RecoupIQ Ltd.</p>
+<h2>Clear yearly prices (no meetings needed)</h2>
+<p>Every paid plan gives you ready-to-run program files and an offline text key. RecoupIQ Ltd keeps its C source code private. Channel partners get a 35% trade discount on list prices.</p>
 <div class="table-wrap"><table>
-  <tr><th>Edition</th><th>Included Binary Scope &amp; Deployment Rights</th><th class="n">Published Price (GBP)</th></tr>
+  <tr><th>Plan</th><th>What You Get</th><th class="n">Price (GBP)</th></tr>
   <tr>
-    <td><strong>90-Day Bench Evaluation</strong></td>
-    <td>Full <code>windows-x64</code> + <code>linux-arm64</code> evaluation binaries, CLI, and real sample data (time-locked until <code>2027-02-28</code>).</td>
+    <td><strong>90-Day Lab Test</strong></td>
+    <td>Ready-to-run Windows and Linux ARM64 test tools plus sample logs. Works until 28 February 2027.</td>
     <td class="n">Free</td>
   </tr>
   <tr>
-    <td><strong>Hosted Satellite Webhook Decoder</strong></td>
-    <td>Managed cloud inbound webhook receiver (<code>np_satlink_gateway</code>) decoding compressed bursts, rejecting forged alarms, and forwarding JSON/CoT (up to 25 active units; &pound;695/mo up to 100 units; &pound;2,950/yr self-hosted stripped Docker container).</td>
-    <td class="n">&pound;249 / mo</td>
+    <td><strong>Hosted Shore Receiver</strong></td>
+    <td>Cloud receiver that unpacks boat messages and blocks fake alarms for up to 25 units. Up to 100 units is &pound;695 per month.</td>
+    <td class="n">&pound;249 per mo</td>
   </tr>
   <tr>
-    <td><strong>DORA RT.02 Air-Gapped CLI Licence</strong></td>
-    <td>Annual offline <code>Ed25519</code> key for one regulated financial entity checking EU 2024/2956 ICT supplier TSVs locally (&pound;1,450 / yr for multi-entity groups &amp; consultancies).</td>
-    <td class="n">&pound;395 / yr</td>
+    <td><strong>Offline DORA ID Checker</strong></td>
+    <td>One-year offline tool key for one finance firm checking supplier lists locally. Group and advisor price is &pound;1,450 per year.</td>
+    <td class="n">&pound;395 per yr</td>
   </tr>
   <tr>
-    <td><strong>Serial Guard Utility Site Licence</strong></td>
-    <td>Compiled <code>linux-arm64</code> / <code>x86-64</code> serial radio encryptor per outstation link ahead of the UK PSTN switch-off (+ &pound;55 / site / yr maintenance).</td>
-    <td class="n">&pound;295 / site</td>
+    <td><strong>Serial Radio Site Lock</strong></td>
+    <td>Ready-to-run Linux serial radio lock for one utility site. Optional yearly support is &pound;55 per site.</td>
+    <td class="n">&pound;295 per site</td>
   </tr>
   <tr>
-    <td><strong>MAVLink Quiet-Link BVLOS Licence</strong></td>
-    <td>Production companion-computer + GCS bridge binary per active BVLOS aircraft or USV (&pound;250 30-day flight-bench key, 100% credited on upgrade).</td>
-    <td class="n">&pound;1,450 / aircraft / yr</td>
+    <td><strong>Quiet Drone or Boat Link</strong></td>
+    <td>Onboard and ground link programs for one active drone or boat. A 30-day bench key is &pound;250 and counts toward the full year.</td>
+    <td class="n">&pound;1,450 per yr</td>
   </tr>
   <tr>
-    <td><strong>Single-Product Binary SDK (Starter)</strong></td>
-    <td>Compiled <code>ByteSDK</code> + <code>IS-Micro</code> static/shared libraries (<code>x86-64</code> + <code>ARM64</code>) for one commercial product up to 50 deployed units or vessels.</td>
-    <td class="n">&pound;1,450 / yr</td>
+    <td><strong>Starter Fleet Pack (50 Units)</strong></td>
+    <td>Ready-to-run ByteSDK libraries for one product on up to 50 boats or devices. Partner price is &pound;942.50 per year.</td>
+    <td class="n">&pound;1,450 per yr</td>
   </tr>
   <tr>
-    <td><strong>Edge GDPR Camera OEM Binary SDK</strong></td>
-    <td>Royalty-free compiled <code>ARM64</code> + <code>x86-64</code> redaction &amp; keyed <code>BLAKE2b</code> scene-receipt archive for one dashcam, bodycam, or drone camera model.</td>
-    <td class="n">&pound;1,950 / yr</td>
+    <td><strong>Camera Privacy OEM Pack</strong></td>
+    <td>Ready-to-run face and plate blur library with scene seal for one dashcam, bodycam, or drone camera model.</td>
+    <td class="n">&pound;1,950 per yr</td>
   </tr>
   <tr>
-    <td><strong>Commercial OEM SKU Binary Licence</strong></td>
-    <td>Royalty-free binary distribution across unlimited units of one commercial product SKU, including pre-compiled Arm <code>Cortex-M0+/M4/M33</code> (<code>.a</code>), <code>ARM64</code>, and <code>x86-64</code> archives + priority updates.</td>
-    <td class="n">&pound;3,950 / yr</td>
+    <td><strong>Unlimited Single-Model Pack</strong></td>
+    <td>Unlimited units on one product model across PC, Linux ARM64, and Arm chip libraries. Partner price is &pound;2,567.50 per year.</td>
+    <td class="n">&pound;3,950 per yr</td>
   </tr>
 </table></div>
-<p style="font-size:0.9rem;color:var(--muted);margin-top:10px;">Regulated defence or critical-infrastructure buyers requiring third-party bankruptcy source-code escrow (NCC / Escode, compiled binary operation in normal course): &pound;24,000 / yr.</p>
+<p style="font-size:0.9rem;color:var(--muted);margin-top:10px;">For defence or utility buyers who need third-party bankruptcy source escrow, the yearly fee is &pound;24,000.</p>
 
-<h2>The engineering limits, stated plainly</h2>
+<h2>Plain limits to know before you buy</h2>
 <ul>
-  <li><strong>Pure OSI Layer 2/6 software boundary:</strong> Acoustic transducers, RS-485 voltage transceivers, satellite modems, and camera sensors remain inside your host hardware.</li>
-  <li><strong>Honest entropy check:</strong> Text, NMEA 0183, CSV, and JSON telemetry compress 2.4&times;&ndash;17.6&times;. Already bit-packed binary structs (&lt;1.35&times;) should keep raw binary framing and use <code>IS-Micro</code> 11&ndash;20 byte authentication only.</li>
-  <li><strong>Redaction &amp; compliance review:</strong> Edge GDPR Vault scrubs caller-supplied ROI coordinates and seals unredacted background pixels. A qualified human compliance officer must review regulatory filings before submission.</li>
+  <li><strong>Software only:</strong> Your own modems, radios, sonar parts, and cameras stay inside your hardware.</li>
+  <li><strong>Lab and board tests:</strong> We ran these tests on PCs, a Raspberry Pi 4, and chip emulators, not live satellites or sonar tanks.</li>
+  <li><strong>Best on text logs:</strong> GPS, weather, CSV, and JSON text shrink 4 to 14 times. Tiny 15-byte binary fixes do not shrink further and only need our 13-byte anti-fake tag.</li>
+  <li><strong>Human check needed:</strong> Our tools give analytical support only. A qualified person must check all compliance reports and blurred photos before release.</li>
 </ul>
 
-<h2>Verify on your own data before buying</h2>
-<p>Unzip <code>RecoupIQ_ByteSDK_Eval_2027-02-28.zip</code> and run <code>RUN_30_SECOND_OEM_EVAL.bat</code> on Windows or <code>bash run_30_second_oem_eval.sh</code> on Linux ARM64, or run our free cloud benchmark on Apify Store (<code>recoupiq/satellite-airtime-compression-proof-calculator</code>). Request a VAT-exempt UK invoice (RecoupIQ Ltd is below the UK VAT registration threshold) or self-serve checkout link by email with your company slug to receive your signed <code>RIQLIC1:...</code> key.</p>
-<a class="cta" href="downloads/RecoupIQ_ByteSDK_Eval_2027-02-28.zip">Download Free Eval (.zip)</a>
-<a class="cta-sec" href="mailto:alex.v@recoup-iq.tech?subject=ByteSDK%20Commercial%20Licence%20Order%20(Specify%20Tier)">Request Instant Invoice / Licence Key</a>
+<h2>Test it on your own sample data in 30 seconds</h2>
+<ol>
+  <li>Download <code>RecoupIQ_ByteSDK_Eval_2027-02-28.zip</code> and run <code>RUN_30_SECOND_OEM_EVAL.bat</code> on Windows.</li>
+  <li>If you use Linux ARM64, run <code>bash run_30_second_oem_eval.sh</code> in your folder.</li>
+  <li>Try our <a href="https://apify.com/recoupiq/satellite-airtime-compression-proof-calculator">free online byte calculator</a> on Apify Store.</li>
+  <li>If you want a UK invoice with zero VAT added, email your company name to <code>contact@recoup-iq.tech</code>.</li>
+</ol>
+<a class="cta" href="downloads/RecoupIQ_ByteSDK_Eval_2027-02-28.zip">Download Free Test (.zip)</a>
+<a class="cta-sec" href="mailto:contact@recoup-iq.tech?subject=ByteSDK%20Licence%20Order">Email for Invoice and Key</a>
 
-<footer>RecoupIQ Ltd (UK Companies House No. 16947526) &middot; 410 High Street, Flat 1, Lincoln, LN5 7TE, United Kingdom &middot; alex.v@recoup-iq.tech &middot; <a href="https://www.linkedin.com/in/alex-vasile-ai-engineer/">LinkedIn</a></footer>
+<footer>RecoupIQ Ltd (Company No. 16947526) &middot; 410 High Street, Flat 1, Lincoln, LN5 7TE, United Kingdom &middot; <a href="mailto:contact@recoup-iq.tech">contact@recoup-iq.tech</a> &middot; <a href="https://apify.com/recoupiq">Apify Store</a> &middot; <a href="https://www.linkedin.com/in/alex-vasile-ai-engineer/">LinkedIn</a></footer>
 </main>
 </body>
 </html>
