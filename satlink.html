@@ -3,16 +3,16 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>RecoupIQ: NeuroPulse SatLink</title>
+<title>RecoupIQ: Satellite Data Saver and Drone Link Benchmarks</title>
 <link rel="icon" type="image/png" href="assets/RecoupIQ_Org_Logo_512x512.png">
-<meta name="description" content="Lossless compression of satellite telemetry messages and a MAVLink link for drones over narrow, lossy radios. Measured on public data.">
+<meta name="description" content="Measured satellite text compression and drone radio link tests on public buoy, GPS, and autopilot logs.">
 <style>
 :root { --bg: #ffffff; --fg: #17202a; --muted: #5d6d7e; --line: #d5dbe1; --accent: #0b5cad; --card: #f5f7f9; }
 @media (prefers-color-scheme: dark) { :root { --bg: #11161c; --fg: #e8edf2; --muted: #9aa8b6; --line: #2b3640; --accent: #5aa9ff; --card: #182029; } }
 * { box-sizing: border-box; }
 body { margin: 0; background: var(--bg); color: var(--fg); font: 17px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
 main { max-width: 880px; margin: 0 auto; padding: 0 16px 64px; }
-nav { padding: 18px 0; border-bottom: 1px solid var(--line); font-size: 0.95rem; display: flex; gap: 20px; flex-wrap: wrap; }
+nav { padding: 18px 0; border-bottom: 1px solid var(--line); font-size: 0.95rem; display: flex; gap: 20px; flex-wrap: wrap; align-items: center; }
 header { padding: 40px 0 24px; border-bottom: 1px solid var(--line); }
 h1 { font-size: 2.1rem; line-height: 1.2; margin: 0 0 12px; }
 h2 { font-size: 1.35rem; margin: 40px 0 12px; }
@@ -26,6 +26,7 @@ th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--lin
 td.n, th.n { text-align: right; white-space: nowrap; }
 .table-wrap { overflow-x: auto; }
 ul { padding-left: 20px; }
+li { margin-bottom: 6px; }
 a { color: var(--accent); }
 .cta { display: inline-block; margin-top: 12px; padding: 10px 18px; border-radius: 6px; background: var(--accent); color: #fff; text-decoration: none; font-weight: 600; }
 footer { margin-top: 48px; padding-top: 16px; border-top: 1px solid var(--line); color: var(--muted); font-size: 0.9rem; }
@@ -33,66 +34,58 @@ footer { margin-top: 48px; padding-top: 16px; border-top: 1px solid var(--line);
 </head>
 <body>
 <main>
-<nav style="align-items:center">
+<nav>
   <img src="assets/RecoupIQ_Org_Logo_512x512.png" alt="RecoupIQ Logo" width="32" height="32" style="border-radius:6px;display:block">
-  <strong>NeuroPulse SatLink</strong>
-  <a href="index.html">RecoupIQ ByteSDK &amp; DORA CLI (Self-Serve Download)</a>
+  <a href="index.html">RecoupIQ ByteSDK and Prices</a>
+  <strong>Drone and Buoy Benchmarks</strong>
 </nav>
 <header>
-  <h1>Send more over satellite and narrow radio links</h1>
-  <p class="lead">NeuroPulse SatLink: lossless compression for telemetry messages, and a MAVLink link for drones over
-  narrow, lossy radios. Every number on this page was measured on public data or our own recordings, never on the data
-  used to tune the product.</p>
-  <a class="cta" href="mailto:alex.v@recoup-iq.tech?subject=SatLink%20evaluation%20kit">Request the evaluation kit</a>
+  <h1>Send more sensor data over satellite and narrow radios</h1>
+  <p class="lead">We make small software tools that shrink satellite text messages and protect drone radio links. We measured every number on public logs or our own recordings, never on training files.</p>
+  <a class="cta" href="downloads/RecoupIQ_ByteSDK_Eval_2027-02-28.zip">Download Free 30-Second Test (.zip)</a>
 </header>
 
-<h2>1. Telemetry compression (NPCT)</h2>
-<p>Each message is compressed on its own, as a device sends it in one Iridium SBD burst. Dictionaries for common
-telemetry formats are built into the library, so both ends always have them. Damaged data is refused, never decoded
-wrong.</p>
+<h2>1. Satellite text message compression (NPCT)</h2>
+<p>Our library shrinks each message on its own before your modem sends a 340-byte satellite burst. Both ends hold the same built-in word lists. The receiver spots and blocks damaged messages right away.</p>
 <div class="grid">
-  <div class="card"><h3>Ocean buoy reading</h3><div class="big">6 → 1</div>Iridium credits per message (282 bytes to about 40, lossless)</div>
-  <div class="card"><h3>Gateway batching</h3><div class="big">88</div>buoy readings per 340-byte burst, against 28 with zstd and a trained dictionary</div>
-  <div class="card"><h3>Against zstd</h3><div class="big">30–34%</div>smaller per message than zstd with a dictionary trained on similar data</div>
+  <div class="card"><h3>3 Buoy Readings</h3><div class="big">6 to 2</div>50-byte satellite credits per message (285 bytes down to 59 bytes, zero data lost)</div>
+  <div class="card"><h3>Batched Readings</h3><div class="big">88 vs 28</div>buoy readings fit in one 340-byte message, compared to 28 with zstd</div>
+  <div class="card"><h3>Smaller Than zstd</h3><div class="big">30 to 34%</div>smaller per message than zstd with a custom word list</div>
 </div>
 <div class="table-wrap"><table>
-  <tr><th>Data (messages of at most 340 bytes, from sources never used to build the dictionaries)</th><th class="n">Ratio</th></tr>
-  <tr><td>NOAA ocean buoy logs (fixed-width text)</td><td class="n">7.6x</td></tr>
-  <tr><td>NMEA 0183 GPS sentences</td><td class="n">5.8x</td></tr>
-  <tr><td>Drone telemetry as JSON</td><td class="n">4.5–6.0x</td></tr>
-  <tr><td>Cursor-on-Target position events</td><td class="n">11.0x</td></tr>
-  <tr><td>AIS ship-tracking sentences</td><td class="n">2.7x</td></tr>
-  <tr><td>MAVLink v2 binary</td><td class="n">2.1x</td></tr>
+  <tr><th>Sample Data (messages up to 340 bytes on fresh test files)</th><th class="n">Size Drop</th></tr>
+  <tr><td>NOAA ocean buoy text logs</td><td class="n">7.6x</td></tr>
+  <tr><td>NMEA 0183 boat GPS text lines</td><td class="n">5.8x</td></tr>
+  <tr><td>Drone flight logs in JSON text</td><td class="n">4.5 to 6.0x</td></tr>
+  <tr><td>Synthetic XML map events (test format only, not for real ATAK radios)</td><td class="n">11.0x</td></tr>
+  <tr><td>AIS ship tracking lines</td><td class="n">2.7x</td></tr>
+  <tr><td>MAVLink v2 binary packets</td><td class="n">2.1x</td></tr>
 </table></div>
-<p>Whole files without a dictionary: 7.7x on the Canterbury Corpus (xz 5.7x, brotli 5.7x, zstd 5.4x) and 24.8x on
-NOAA buoy logs. Identical output on Windows and Linux, x86-64 and ARM64.</p>
+<p>On full daily files with no word list, our tool shrinks NOAA buoy logs 24.8 times (xz gets 14.4x). Windows, Linux PC, and Raspberry Pi 4 builds give the exact same bytes.</p>
 
-<h2>2. MAVLink drone link</h2>
-<p>A bridge on each side of the radio carries MAVLink between a ground station and a PX4 or ArduPilot vehicle:
-authenticated commands, an erasure-coded tunnel for parameters, missions and logs, and the flight controller's own
-link-loss failsafe in charge.</p>
+<h2>2. MAVLink drone and boat radio link</h2>
+<p>A small program on each end carries MAVLink commands between your ground station and a PX4 or ArduPilot drone or boat. It tags commands against fakes, recovers lost radio slots, and keeps the autopilot return-home safety rule active.</p>
 <div class="grid">
-  <div class="card"><h3>Lossy link</h3><div class="big">99.3%</div>of real MAVLink messages delivered at 10% radio-slot loss (75.0% without the erasure code)</div>
-  <div class="card"><h3>Commands</h3><div class="big">99.925%</div>delivered at Es/N0 +0.6 dB; forged and replayed commands refused</div>
-  <div class="card"><h3>Failsafe</h3><div class="big">≈ 5 s</div>to return-to-launch after the link is cut (ArduPilot flight controller, simulated)</div>
+  <div class="card"><h3>Noisy Radio</h3><div class="big">99.3%</div>of 3,000 real MAVLink messages arrived at 10% slot loss (75.0% without our code)</div>
+  <div class="card"><h3>Signed Commands</h3><div class="big">99.925%</div>arrived in low-signal lab tests, and the receiver blocked fake and repeated commands</div>
+  <div class="card"><h3>Safety Return</h3><div class="big">About 5 s</div>to trigger return-to-home after a cut link in ArduPilot flight simulation</div>
 </div>
 
-<h2>The limits, plainly</h2>
+<h2>Plain limits to know first</h2>
 <ul>
-  <li>NPCT needs a Linux-class processor (about 1.2 MB of memory per call, about 0.5 ms per message on a desktop CPU):
-  gateways and companion computers, not small microcontrollers.</li>
-  <li>Binary formats such as MAVLink and AIS carry already packed values: about 2x. Text and fixed-width telemetry: 4–11x.</li>
-  <li>Compression with integrity checking, and authenticated drone commands: not encryption.</li>
+  <li>The full NPCT library uses 1.2 MB of memory on Linux boards and PCs. Small Arm chips with 64 KB of memory use our lighter encoder, tested in chip emulators so far.</li>
+  <li>Binary packets like MAVLink and AIS shrink about 2 times. Text logs shrink 4 to 8 times, and one single 94-byte buoy reading drops from 2 credits to 1.</li>
+  <li>NPCT checks for broken data and signs alarms, but it does not encrypt message text.</li>
+  <li>We ran these drone and satellite link tests in software simulators and on a Raspberry Pi 4, not on live satellites or flying aircraft yet.</li>
+  <li>A qualified person must check all test results before field use.</li>
 </ul>
 
-<h2>Try it on your own data</h2>
-<p>The evaluation kit runs on Windows and Linux (x86-64, ARM64). One command, <code>np_npct try &lt;your log&gt;</code>,
-shows the bytes and Iridium credits per message next to zstd, with every message decoded back and checked. It includes
-the pre-compiled C99 binary library (zero source code exposed), a decoder for your provider's webhook, the drone link, and a step-by-step simulator test.</p>
-<a class="cta" href="downloads/RecoupIQ_ByteSDK_Eval_2027-02-28.zip">Download Free 30-Second Binary Eval (.zip)</a>
-<a class="cta" style="margin-left:10px;background:transparent;color:var(--accent);border:1px solid var(--accent)" href="mailto:alex.v@recoup-iq.tech?subject=SatLink%20evaluation%20kit">Order Commercial Licence Key</a>
+<h2>Try it on your own log file</h2>
+<p>Our free test zip runs on Windows and Linux (PC and ARM64). You get ready-to-run program files with zero source code exposed, a cloud receiver tool, and sample logs. You can also test any text sample in your browser with our <a href="https://apify.com/recoupiq/satellite-airtime-compression-proof-calculator">free online byte calculator</a>.</p>
+<a class="cta" href="downloads/RecoupIQ_ByteSDK_Eval_2027-02-28.zip">Download Free Test (.zip)</a>
+<a class="cta" style="margin-left:10px;background:transparent;color:var(--accent);border:1px solid var(--accent)" href="mailto:contact@recoup-iq.tech?subject=RecoupIQ%20ByteSDK%20Licence%20Order">Order Commercial Licence Key</a>
 
-<footer>RecoupIQ Ltd (UK Co. No. 16947526) &middot; NeuroPulse SatLink &middot; alex.v@recoup-iq.tech &middot; <a href="https://www.linkedin.com/in/alex-vasile-ai-engineer/">LinkedIn</a></footer>
+<footer>RecoupIQ Ltd (Company No. 16947526) &middot; 410 High Street, Flat 1, Lincoln, LN5 7TE, United Kingdom &middot; <a href="mailto:contact@recoup-iq.tech">contact@recoup-iq.tech</a> &middot; <a href="https://apify.com/recoupiq">Apify Store</a> &middot; <a href="https://www.linkedin.com/in/alex-vasile-ai-engineer/">LinkedIn</a></footer>
 </main>
 </body>
 </html>
