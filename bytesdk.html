@@ -49,8 +49,8 @@ footer { margin-top: 48px; padding-top: 16px; border-top: 1px solid var(--line);
   <a class="cta-sec" href="https://recoup.gumroad.com">Buy Instant Key on Gumroad</a>
 </header>
 
-<h2>Six ready-to-run tools in one small download</h2>
-<p>Each tool comes ready to run on Windows PCs, Linux PCs, Raspberry Pi 4 boards, and small Arm chips. Your software calls one plain C header file (<code>recoupiq_bytesdk.h</code>), and your own code stays private.</p>
+<h2>Six tools</h2>
+<p>The free download holds tools 1 to 4 as libraries for Windows x64 and Linux ARM64 (Raspberry Pi 4). Tools 5 and 6 are separate. Your software calls one plain C header file (<code>recoupiq_bytesdk.h</code>), and your own code stays private.</p>
 
 <div class="grid">
   <div class="card">
@@ -60,28 +60,28 @@ footer { margin-top: 48px; padding-top: 16px; border-top: 1px solid var(--line);
   </div>
   <div class="card">
     <h3>2. Subsea and Boat Data Saver</h3>
-    <div class="big">8.55x smaller</div>
-    Shrinks UK Met Office lightship weather text from 564 bytes to 66 bytes in 7.5 KB of memory. Splits data into 32-byte tagged pieces.
+    <div class="big">8 to 9x smaller</div>
+    Shrinks 570-byte NOAA buoy weather messages to 62 bytes on average (57 to 66 bytes, 16 messages), and 564-byte Sevenstones lightship messages to 72 bytes (67 to 76, 3 messages). zstd -19 with the same dictionary gives 96 and 95 bytes. Uses about 17 KB of RAM plus a dictionary. Splits data into 32-byte tagged pieces. PC test. Not tested with any modem.
   </div>
   <div class="card">
     <h3>3. Ship Fuel Meter Check</h3>
-    <div class="big">0 false alarms</div>
-    Shrinks ship GPS and fuel text logs. Spots an 18% fuel pipe bypass against engine load, and locks gap notes against edits.
+    <div class="big">Two-series check</div>
+    Compares the fuel flow you logged with the flow you expected. At the default 5% tolerance, it flagged 0 of 100 healthy synthetic runs with up to 5% noise, and 100 of 100 runs with flow 8% or more below expected. Gaps under 5% are not flagged. It cannot see a pipe. Tests used synthetic data, not ship data. Also locks gap notes against edits.
   </div>
   <div class="card">
     <h3>4. Camera Privacy Blur Box</h3>
     <div class="big">7.37 ms</div>
-    Blurs face and plate boxes on a 768 by 512 photo on a Raspberry Pi 4. Wipes raw memory and seals the rest of the photo.
+    Blurs the face and plate boxes that your software supplies, on a 768 by 512 photo on a Raspberry Pi 4. Wipes raw memory and seals the rest of the photo. The library does not find faces. Only the Apify actor has an auto finder (stock OpenCV Haar cascades; it misses angled faces and many UK plates).
   </div>
   <div class="card">
     <h3>5. Quiet Drone and Boat Link</h3>
     <div class="big">191.5 KB per hr</div>
-    Sends signed drone and boat commands over satellite IP links. Uses about 80 times less data than normal ground-station rates in lab runs.
+    Sends signed drone and boat commands over satellite IP links. In simulator runs it used about 1.5 times fewer bytes than a hard-tuned MAVLink link, and up to 80 times fewer than default ground-station rates.
   </div>
   <div class="card">
-    <h3>6. Old Serial Radio Lock</h3>
-    <div class="big">10.2 ms</div>
-    Protects 9,600-baud serial radio links with encryption and anti-replay tags. Passed 300 out of 300 Modbus checks on a Raspberry Pi 4.
+    <h3>6. Old Serial Radio Lock (pilot only)</h3>
+    <div class="big">Pilot only</div>
+    Encrypts 9,600-baud serial radio links and refuses replayed frames. Passed 300 of 300 Modbus checks on a Raspberry Pi 4 over pseudo-terminals. Not yet tested on RS-485 wires. No independent security review. Pilot by email only.
   </div>
 </div>
 
@@ -90,14 +90,14 @@ footer { margin-top: 48px; padding-top: 16px; border-top: 1px solid var(--line);
 <div class="table-wrap"><table>
   <tr><th>Plan</th><th>What You Get</th><th class="n">Price (GBP)</th></tr>
   <tr>
-    <td><strong>90-Day Lab Test</strong></td>
+    <td><strong>Free test until 28 February 2027</strong></td>
     <td>Ready-to-run Windows and Linux ARM64 test tools plus sample logs. Works until 28 February 2027.</td>
     <td class="n">Free</td>
   </tr>
   <tr>
-    <td><strong>Hosted Shore Receiver</strong></td>
-    <td>Cloud receiver that unpacks boat messages and blocks fake alarms for up to 25 units. Up to 100 units is &pound;695 per month.</td>
-    <td class="n">&pound;249 per mo</td>
+    <td><strong>Shore Receiver</strong></td>
+    <td>Receiver that unpacks boat messages and blocks fake alarms. No hosted service is live yet. We set it up for each customer. Ask by email.</td>
+    <td class="n">By email</td>
   </tr>
   <tr>
     <td><strong>Offline DORA ID Checker</strong></td>
@@ -111,13 +111,13 @@ footer { margin-top: 48px; padding-top: 16px; border-top: 1px solid var(--line);
   </tr>
   <tr>
     <td><strong>Ship Fuel Meter Checker</strong></td>
-    <td>One-year offline desktop tool that spots missing or stuck ship fuel readings. <a href="https://recoup.gumroad.com/l/ship-fuel-meter-checker-cli">Buy instant key</a>.</td>
-    <td class="n">&pound;495 per yr</td>
+    <td>One-year offline tool that compares logged fuel flow with expected flow and flags gaps above your tolerance. Tested on synthetic data only. Not on sale yet: the desktop tool cannot read your own log files. Email us if you want to test it.</td>
+    <td class="n">Not on sale</td>
   </tr>
   <tr>
     <td><strong>Serial Radio Site Lock</strong></td>
-    <td>Ready-to-run Linux serial radio lock for one utility site. Optional yearly support is &pound;55 per site.</td>
-    <td class="n">&pound;295 per site</td>
+    <td>Pilot only, by email. Not yet tested on RS-485 wires. No independent security review.</td>
+    <td class="n">Pilot only</td>
   </tr>
   <tr>
     <td><strong>Quiet Drone or Boat Link</strong></td>
@@ -160,6 +160,18 @@ footer { margin-top: 48px; padding-top: 16px; border-top: 1px solid var(--line);
 <a class="cta" href="downloads/RecoupIQ_ByteSDK_Eval_2027-02-28.zip">Download Free Test (.zip)</a>
 <a class="cta-sec" href="https://recoup.gumroad.com">Buy Instant Key on Gumroad</a>
 <a class="cta-sec" href="mailto:contact@recoup-iq.tech?subject=ByteSDK%20Licence%20Order">Email for UK Invoice</a>
+
+<h2 id="terms">Terms, refunds and privacy</h2>
+<ul>
+  <li><strong>Seller:</strong> RecoupIQ Ltd, a company registered in England and Wales (Company No. 16947526), 410 High Street, Flat 1, Lincoln, LN5 7TE, United Kingdom. Email: <a href="mailto:contact@recoup-iq.tech">contact@recoup-iq.tech</a>.</li>
+  <li><strong>Business sale only:</strong> We sell to businesses, not to consumers.</li>
+  <li><strong>What you receive:</strong> An offline licence key (a text token) by email or from Gumroad. The key unlocks the program files from the free download for the term and the number of units in your plan. You do not receive source code.</li>
+  <li><strong>Refunds:</strong> You can ask for a full refund within 14 days of purchase if you did not use the key in production. Email us with your order number.</li>
+  <li><strong>Privacy, offline tools:</strong> The offline tools and libraries do not send data anywhere and collect no personal data.</li>
+  <li><strong>Privacy, Apify actors:</strong> The actors run in your own Apify account. Apify processes the data that you give them, under Apify's terms. The actor code does not send your input to RecoupIQ. The supplier ID actor sends the LEI codes you supply to the public GLEIF service.</li>
+  <li><strong>No warranty for compliance:</strong> The tools give analytical support only. A qualified person must check results before any filing.</li>
+  <li><strong>Law:</strong> These terms are governed by the law of England and Wales.</li>
+</ul>
 
 <footer>RecoupIQ Ltd (Company No. 16947526) &middot; 410 High Street, Flat 1, Lincoln, LN5 7TE, United Kingdom &middot; <a href="mailto:contact@recoup-iq.tech">contact@recoup-iq.tech</a> &middot; <a href="https://recoup.gumroad.com">Gumroad Store</a> &middot; <a href="https://apify.com/recoupiq">Apify Store</a> &middot; <a href="https://www.linkedin.com/in/alex-vasile-ai-engineer/">LinkedIn</a></footer>
 </main>
